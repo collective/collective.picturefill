@@ -71,4 +71,5 @@ Thumbs.db
 bin
 parts
 develop-eggs
+src
 var
