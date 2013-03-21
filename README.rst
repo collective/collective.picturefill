@@ -3,13 +3,25 @@ Introduction
 
 This addon install picturefill_ in Plone and provide a suite of tools to
 display images from different kind of components such as brain, dexterity object
-or archetypes.
+or archetypes object.
 
 How to install
 ==============
 
 This addon can be installed has any other addons. please follow official
 documentation_
+
+How to use
+==========
+
+in template::
+
+    tal:content="structure myimage_object/@@polyfill"
+
+in python::
+
+    from collective.picturefill.interfaces import IPictureFill
+    IPictureFill(brain)()
 
 Credits
 =======
