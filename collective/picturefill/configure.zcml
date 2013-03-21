@@ -6,6 +6,7 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.picturefill">
 
   <include package="five.globalrequest" />
@@ -29,9 +30,19 @@
       />
 
   <browser:page
+      zcml:condition="installed plone.namedfile"
       for="plone.namedfile.interfaces.IImageScaleTraversable"
       name="picturefill"
-      class=".dx.PictureFill"
+      class=".view.PictureFill"
+      template="picturefill.pt"
+      layer=".layer.Layer"
+      permission="zope2.View"
+      />
+  <browser:page
+      zcml:condition="installed Products.ATContentTypes"
+      for="Products.ATContentTypes.interfaces.image.IImageContent"
+      name="picturefill"
+      class=".view.PictureFill"
       template="picturefill.pt"
       layer=".layer.Layer"
       permission="zope2.View"

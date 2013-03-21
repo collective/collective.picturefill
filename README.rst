@@ -1,7 +1,9 @@
 Introduction
 ============
 
-This addon use picturefill_ to render /@@images/myfiled tag
+This addon install picturefill_ in Plone and provide a suite of tools to
+display images from different kind of components such as brain, dexterity object
+or archetypes.
 
 How to install
 ==============
