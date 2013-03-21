@@ -1,17 +1,21 @@
-from plone.namedfile import scaling
+from Products.Five.browser import BrowserView
 
-_marker = scaling._marker
+class PictureFill(BrowserView):
+    """Tag renderer for dexterity"""
 
+    def update(self):
+        self.context_url = self.context.absolute_url()
+        self.fieldname = self.request.get('field', 'image')
+        BASE = self.context_url + '/@@images/' + self.fieldname
+        self.alt = self.context.Title()
+        self.src_small = BASE + '/mini'
+        self.src_medium = BASE + '/preview'
+        self.src_large = BASE + '/large'
+        self.src_extralarge = BASE
+        self.media_medium = "(min-width: 400px)"
+        self.media_large = "(min-width: 800px)"
+        self.media_extralarge = "(min-width: 1000px)"
 
-class ImageScale(scaling.ImageScale):
-    def tag(self, height=_marker, width=_marker, alt=_marker,
-            css_class=None, title=_marker, **kwargs):
-        """ """
-        import pdb;pdb.set_trace()
-        super(ImageScale, self).tag(height=height, width=width, alt=alt,
-            css_class=css_class, title=title, **kwargs)
-
-
-class ImageScaling(scaling.ImageScaling):
-    """ view override to use picturefill"""
-    ImageScale = ImageScale
+    def __call__(self):
+        self.update()
+        return self.index()
