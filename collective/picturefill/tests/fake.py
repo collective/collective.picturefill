@@ -52,13 +52,13 @@ class FakeRequest(Request):
 
 class FakeBrain(object):
     def __init__(self):
-        self.Title = ""
+        self.Title = "a title"
         self.Description = ""
-        self.getId = ""
-        self.portal_type = ""
+        self.getId = "myid"
+        self.portal_type = "Image"
 
     def getURL(self):
-        return "http://fakebrain.com"
+        return "http://nohost.com/myid"
 
     def getObject(self):
         ob = FakeContext()

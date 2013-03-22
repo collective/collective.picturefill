@@ -14,7 +14,7 @@ class PictureFill(object):
         self.pictures = []
         self.noscript = ""
         self.request = None
-        self.item_url = ""
+        self.context_url = ""
         self.base_url = ""
 
     def __call__(self):
@@ -26,10 +26,10 @@ class PictureFill(object):
             self.request = getRequest()  # support viewpagetemplatefile
         if not self.fieldname:
             self.fieldname = 'image'
-        if not self.base_url and not self.item_url:
-            self.item_url = self.context.getURL()
+        if not self.context_url:
+            self.context_url = self.context.getURL()
         if not self.base_url:
-            self.base_url = self.item_url + '/@@images/' + self.fieldname + '/'
+            self.base_url = self.context_url + '/@@images/' + self.fieldname + '/'
         if not self.sizes:
             self.sizes = getAllowedSizes()
         if not self.pictures or not self.noscript:
