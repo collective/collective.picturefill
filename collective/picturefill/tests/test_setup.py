@@ -18,6 +18,28 @@ class TestSetup(base.IntegrationTestCase):
         picturefill = jsregistry.getResource('++resource++picturefill.min.js')
         self.assertIsNotNone(picturefill)
 
+    def test_upgrades(self):
+        profile = 'collective.picturefill:default'
+        setup = self.portal.portal_setup
+        upgrades = setup.listUpgrades(profile, show_old=True)
+        self.assertTrue(len(upgrades) > 0)
+        for upgrade in upgrades:
+            upgrade['step'].doStep(setup)
+
+
+class TestUninstall(base.IntegrationTestCase):
+    """Test if the addon uninstall well"""
+
+    def setUp(self):
+        super(TestUninstall, self).setUp()
+        qi = self.portal['portal_quickinstaller']
+        qi.uninstallProducts(products=['collective.picturefill'])
+
+    def test_uninstall_browserlayer(self):
+        from collective.picturefill.layer import Layer
+        layers = utils.registered_layers()
+        self.assertNotIn(Layer, layers)
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
