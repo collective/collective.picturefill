@@ -1,7 +1,6 @@
 import unittest2 as unittest
 from collective.picturefill.tests import base
 from collective.picturefill import common
-from collective.picturefill.common import PictureFill
 
 
 class UnitTestCommon(base.UnitTestCase):
@@ -28,16 +27,6 @@ class UnitTestCommon(base.UnitTestCase):
         self.assertTrue(picture['media'].endswith('px)'))
         width = picture['media'][12:-3]
         self.assertTrue(width.isdigit())
-
-    def test_picturefill_view(self):
-        view = PictureFill(self.context, self.request)
-        view.sizes = self.sizes
-        view.update()
-        self.assertEqual(view.alt, 'a title')
-        self.assertEqual(view.context_url, 'http://nohost.com/myid')
-        self.assertEqual(view.fieldname, 'image')
-        base_url = 'http://nohost.com/myid/@@images/image/'
-        self.assertEqual(view.base_url, base_url)
 
 
 class IntegrationTestCommon(base.IntegrationTestCase):

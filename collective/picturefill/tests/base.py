@@ -25,7 +25,6 @@ FUNCTIONAL = testing.FunctionalTesting(
 class UnitTestCase(unittest.TestCase):
 
     def setUp(self):
-        
         self.request = FakeRequest()
         self.context = FakeContext()
         sizes = {'mini': (200, 200), 'thumb': (128, 128), 'large': (768, 768)}
