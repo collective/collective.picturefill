@@ -2,17 +2,15 @@ from Products.Five.browser import BrowserView
 from plone.app.imaging.utils import getAllowedSizes
 
 
-def getPictures(base_url, sizes=None):
+def getPictures(base_url, sizes):
     """Return a list of pictures.
     A picture: {'src': base_url/thumb, 'media': "(max-width: 300px)"}
     """
     pictures = []
-    if sizes is None:
-        sizes = getAllowedSizes()
     widths = []
     names = {}
     for name in sizes:
-        width, height = sizes[name]
+        width = sizes[name][0]
         widths.append(width)
         names[str(width)] = name
     widths.sort()
@@ -33,12 +31,22 @@ def getPictures(base_url, sizes=None):
 class PictureFill(BrowserView):
     """Tag renderer for dexterity"""
 
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.sizes = []
+        self.pictures = []
+        self.noscript = ""
+
     def update(self):
         self.context_url = self.context.absolute_url()
         self.fieldname = self.request.get('field', 'image')
         base_url = self.context_url + '/@@images/' + self.fieldname + '/'
         self.alt = self.context.Title()
-        self.pictures, self.noscript = getPictures(base_url)
+        if not self.sizes:
+            self.sizes = getAllowedSizes()
+        if not self.pictures or not self.noscript:
+            self.pictures, self.noscript = getPictures(base_url, self.sizes)
 
     def __call__(self):
         self.update()

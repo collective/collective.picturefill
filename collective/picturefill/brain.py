@@ -1,20 +1,39 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.globalrequest import getRequest
 from collective.picturefill.common import getPictures
+from plone.app.imaging.utils import getAllowedSizes
 
 
 class PictureFill(object):
     def __init__(self, context):
         self.context = context
 
-        self.item_url = self.context.getURL()
-        self.fieldname = 'image'
-        base_url = self.item_url + '/@@images/' + self.fieldname + '/'
         self.alt = self.context.Title
-        self.pictures, self.noscript = getPictures(base_url)
-        self.request = getRequest()  # support viewpagetemplatefile
+        self.fieldname = ""
+        self.sizes = []
+        self.pictures = []
+        self.noscript = ""
+        self.request = None
+        self.item_url = ""
+        self.base_url = ""
 
     def __call__(self):
+        self.update()
         return self.index()
+
+    def update(self):
+        if not self.request:
+            self.request = getRequest()  # support viewpagetemplatefile
+        if not self.fieldname:
+            self.fieldname = 'image'
+        if not self.base_url and not self.item_url:
+            self.item_url = self.context.getURL()
+        if not self.base_url:
+            self.base_url = self.item_url + '/@@images/' + self.fieldname + '/'
+        if not self.sizes:
+            self.sizes = getAllowedSizes()
+        if not self.pictures or not self.noscript:
+            pictures = getPictures(self.base_url, self.sizes)
+            self.pictures, self.noscript = pictures
 
     index = ViewPageTemplateFile('picturefill.pt')

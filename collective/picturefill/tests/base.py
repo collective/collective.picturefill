@@ -2,6 +2,7 @@ import transaction
 import unittest2 as unittest
 from plone.app import testing
 import collective.picturefill
+from collective.picturefill.tests.fake import FakeContext
 
 
 FIXTURE = testing.PloneWithPackageLayer(
@@ -24,7 +25,11 @@ FUNCTIONAL = testing.FunctionalTesting(
 class UnitTestCase(unittest.TestCase):
 
     def setUp(self):
-        pass
+        from ZPublisher.tests.testPublish import Request
+        self.request = Request()
+        self.context = FakeContext()
+        sizes = {'mini': (200, 200), 'thumb': (128, 128), 'large': (768, 768)}
+        self.sizes = sizes
 
 
 class IntegrationTestCase(unittest.TestCase):
