@@ -33,7 +33,7 @@
       zcml:condition="installed plone.namedfile"
       for="plone.namedfile.interfaces.IImageScaleTraversable"
       name="picturefill"
-      class=".view.PictureFillView"
+      class=".view.PictureFill"
       template="picturefill.pt"
       layer=".layer.Layer"
       permission="zope2.View"
@@ -42,7 +42,7 @@
       zcml:condition="installed Products.ATContentTypes"
       for="Products.ATContentTypes.interfaces.image.IImageContent"
       name="picturefill"
-      class=".view.PictureFillView"
+      class=".view.PictureFill"
       template="picturefill.pt"
       layer=".layer.Layer"
       permission="zope2.View"
@@ -52,5 +52,21 @@
     provides=".interfaces.IPictureFill"
     factory=".brain.PictureFill"
     />
+  <browser:page
+      zcml:condition="installed plone.namedfile"
+      for="plone.namedfile.interfaces.IImageScaleTraversable"
+      name="picturefill_view"
+      template="picturefill_view.pt"
+      layer=".layer.Layer"
+      permission="zope2.View"
+      />
+  <browser:page
+      zcml:condition="installed Products.ATContentTypes"
+      for="Products.ATContentTypes.interfaces.image.IImageContent"
+      name="picturefill_view"
+      template="picturefill_view.pt"
+      layer=".layer.Layer"
+      permission="zope2.View"
+      />
 
 </configure>

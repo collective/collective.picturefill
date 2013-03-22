@@ -3,7 +3,7 @@ from plone.app.imaging.utils import getAllowedSizes
 from collective.picturefill.common import getPictures
 
 
-class PictureFillView(BrowserView):
+class PictureFill(BrowserView):
     """Tag renderer for dexterity"""
 
     def __init__(self, context, request):

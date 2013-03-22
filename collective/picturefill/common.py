@@ -13,13 +13,23 @@ def getPictures(base_url, sizes):
         names[str(width)] = name
     widths.sort()
     noscript = ""
+    previous = None
     for width in widths:
-        if width > 128 and not noscript:
-            noscript = base_url + name
         name = names[str(width)]
-        image = {'src': base_url + name, 'media': "(max-width: %spx)" % width}
+        if width >= 128 and not noscript:
+            noscript = base_url + name
+            previous = width
+            continue
+        if not previous:
+            continue
+        media = "(min-width: %spx)" % (previous + 1)
+#        media = "(min-width: %spx)" % width
+#        media = "(max-width: %spx)" % width
+        image = {'src': base_url + name, 'media': media}
         pictures.append(image)
-    image = {'src': base_url[:-1], 'media': "(min-width: %spx)" % widths[-1]}
+        previous = width
+    media = "(min-width: %spx)" % (widths[-1] + 1)
+    image = {'src': base_url[:-1], 'media': media}
     pictures.append(image)
 
     #try to find a width > 128px for the noscript image

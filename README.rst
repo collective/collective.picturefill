@@ -23,6 +23,13 @@ in python::
     from collective.picturefill.interfaces import IPictureFill
     IPictureFill(brain)()
 
+CSS: You should use this tricks if you want in your theme that picturefill
+fit the exact size of the container::
+
+    div[data-picture] img{
+        width: 100%;
+    }
+
 Credits
 =======
 

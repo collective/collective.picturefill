@@ -22,14 +22,29 @@ class UnitTestBrain(base.UnitTestCase):
         base_url = 'http://nohost.com/myid/@@images/image/'
         self.assertEqual(picturefill.base_url, base_url)
 
+        def index():
+            return "rendered"
+        picturefill.index = index
+        self.assertEqual(picturefill(), "rendered")
+
 
 class IntegrationTestCommon(base.IntegrationTestCase):
     """We tests the setup (install) of the addons. You should check all
     stuff in profile are well activated (browserlayer, js, content types, ...)
     """
 
-    def test_picturefill_view(self):
-        pass
+    def test_picturefill_request(self):
+        ibrain = FakeBrain()
+        picturefill = brain.PictureFill(ibrain)
+        picturefill.update()
+
+        base_url = 'http://nohost.com/myid/@@images/image/'
+        self.assertEqual(picturefill.base_url, base_url)
+
+        def index():
+            return "rendered"
+        picturefill.index = index
+        self.assertEqual(picturefill(), "rendered")
 
 
 def test_suite():

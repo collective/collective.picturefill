@@ -38,18 +38,10 @@ class IntegrationTestCase(unittest.TestCase):
     def setUp(self):
         super(IntegrationTestCase, self).setUp()
         self.portal = self.layer['portal']
+        self.request = self.layer['request']
         testing.setRoles(self.portal, testing.TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
+        self.portal.invokeFactory('Image', 'myimage')
         testing.setRoles(self.portal, testing.TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
+        self.image = self.portal['myimage']
         from plone.app.imaging.utils import getAllowedSizes
         self.sizes = getAllowedSizes()
-
-
-class FunctionalTestCase(IntegrationTestCase):
-
-    layer = FUNCTIONAL
-
-    def setUp(self):
-        #we must commit the transaction
-        transaction.commit()

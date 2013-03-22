@@ -1,6 +1,6 @@
 import unittest2 as unittest
 from collective.picturefill.tests import base
-from collective.picturefill.view import PictureFillView
+from collective.picturefill.view import PictureFill
 
 
 class UnitTestView(base.UnitTestCase):
@@ -9,7 +9,7 @@ class UnitTestView(base.UnitTestCase):
     """
 
     def test_picturefill_view(self):
-        view = PictureFillView(self.context, self.request)
+        view = PictureFill(self.context, self.request)
         view.sizes = self.sizes
         view.update()
         self.assertEqual(view.alt, 'a title')
@@ -26,6 +26,9 @@ class IntegrationTestCommon(base.IntegrationTestCase):
 
     def test_picturefill_view(self):
         pass
+#        view = self.image.restrictedTraverse('@@picturefill')
+#        render = view()
+#        self.assertEqual(len(view.pictures), 8)
 
 
 def test_suite():

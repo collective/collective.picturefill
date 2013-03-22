@@ -11,12 +11,12 @@ class UnitTestCommon(base.UnitTestCase):
     def test_getPictures(self):
         base_url = 'http://nohost/plone/myimage/@@images/image/'
         pictures, noscript = common.getPictures(base_url, self.sizes)
-        self.assertEqual(len(pictures), 4)
+        self.assertEqual(len(pictures), 3)
         thumb_url = base_url + 'thumb'
         self.assertEqual(noscript, thumb_url)
         for picture in pictures[:-1]:
             self.assertTrue(picture['src'].startswith(base_url))
-            self.assertTrue(picture['media'].startswith('(max-width: '))
+            self.assertTrue(picture['media'].startswith('(min-width: '))
             self.assertTrue(picture['media'].endswith('px)'))
             width = picture['media'][12:-3]
             self.assertTrue(width.isdigit())
@@ -37,12 +37,12 @@ class IntegrationTestCommon(base.IntegrationTestCase):
     def test_getPictures(self):
         base_url = 'http://nohost/plone/myimage/@@images/image/'
         pictures, noscript = common.getPictures(base_url, self.sizes)
-        self.assertEqual(len(pictures), 8)
+        self.assertEqual(len(pictures), 4)
         thumb_url = base_url + 'thumb'
         self.assertEqual(noscript, thumb_url)
         for picture in pictures[:-1]:
             self.assertTrue(picture['src'].startswith(base_url))
-            self.assertTrue(picture['media'].startswith('(max-width: '))
+            self.assertTrue(picture['media'].startswith('(min-width: '))
             self.assertTrue(picture['media'].endswith('px)'))
             width = picture['media'][12:-3]
             self.assertTrue(width.isdigit())
