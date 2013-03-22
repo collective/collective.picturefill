@@ -4,7 +4,7 @@ Changelog
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Use plone.app.imaging api to build the list of pictures [toutpt]
 
 
 0.1 (2013-03-21)
