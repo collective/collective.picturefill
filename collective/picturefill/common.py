@@ -2,12 +2,13 @@ from Products.Five.browser import BrowserView
 from plone.app.imaging.utils import getAllowedSizes
 
 
-def getPictures(base_url):
+def getPictures(base_url, sizes=None):
     """Return a list of pictures.
     A picture: {'src': base_url/thumb, 'media': "(max-width: 300px)"}
     """
     pictures = []
-    sizes = getAllowedSizes()
+    if sizes is None:
+        sizes = getAllowedSizes()
     widths = []
     names = {}
     for name in sizes:

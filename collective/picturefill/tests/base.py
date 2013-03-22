@@ -1,6 +1,24 @@
 import transaction
 import unittest2 as unittest
-from collective.picturefill import testing
+from plone.app import testing
+import collective.picturefill
+
+
+FIXTURE = testing.PloneWithPackageLayer(
+    zcml_filename="configure.zcml",
+    zcml_package=collective.picturefill,
+    additional_z2_products=[],
+    gs_profile_id='collective.picturefill:default',
+    name="collective.picturefill:FIXTURE"
+)
+
+INTEGRATION = testing.IntegrationTesting(
+    bases=(FIXTURE,), name="collective.picturefill:Integration"
+)
+
+FUNCTIONAL = testing.FunctionalTesting(
+    bases=(FIXTURE,), name="collective.picturefill:Functional"
+)
 
 
 class UnitTestCase(unittest.TestCase):
@@ -11,7 +29,7 @@ class UnitTestCase(unittest.TestCase):
 
 class IntegrationTestCase(unittest.TestCase):
 
-    layer = testing.INTEGRATION
+    layer = INTEGRATION
 
     def setUp(self):
         super(IntegrationTestCase, self).setUp()
@@ -24,7 +42,7 @@ class IntegrationTestCase(unittest.TestCase):
 
 class FunctionalTestCase(IntegrationTestCase):
 
-    layer = testing.FUNCTIONAL
+    layer = FUNCTIONAL
 
     def setUp(self):
         #we must commit the transaction
