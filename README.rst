@@ -8,6 +8,9 @@ or archetypes object.
 How to install
 ==============
 
+.. image:: https://secure.travis-ci.org/toutpt/collective.picturefill.png
+    :target: http://travis-ci.org/toutpt/collective.picturefill
+
 This addon can be installed has any other addons. please follow official
 documentation_
 

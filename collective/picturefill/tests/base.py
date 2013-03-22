@@ -1,4 +1,3 @@
-import transaction
 import unittest2 as unittest
 from plone.app import testing
 import collective.picturefill
