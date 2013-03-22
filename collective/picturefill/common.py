@@ -1,4 +1,33 @@
 from Products.Five.browser import BrowserView
+from plone.app.imaging.utils import getAllowedSizes
+
+
+def getPictures(base_url):
+    """Return a list of pictures.
+    A picture: {'src': base_url/thumb, 'media': "(max-width: 300px)"}
+    """
+    pictures = []
+    sizes = getAllowedSizes()
+    widths = []
+    names = {}
+    for name in sizes:
+        width, height = sizes[name]
+        widths.append(width)
+        names[str(width)] = name
+    widths.sort()
+    noscript = ""
+    for width in widths:
+        if width > 128 and not noscript:
+            noscript = base_url + name
+        name = names[str(width)]
+        image = {'src': base_url + name, 'media': "(max-width: %spx)" % width}
+        pictures.append(image)
+    image = {'src': base_url[:-1], 'media': "(min-width: %spx)" % widths[-1]}
+    pictures.append(image)
+
+    #try to find a width > 128px for the noscript image
+    return pictures, noscript
+
 
 class PictureFill(BrowserView):
     """Tag renderer for dexterity"""
@@ -6,15 +35,9 @@ class PictureFill(BrowserView):
     def update(self):
         self.context_url = self.context.absolute_url()
         self.fieldname = self.request.get('field', 'image')
-        BASE = self.context_url + '/@@images/' + self.fieldname
+        base_url = self.context_url + '/@@images/' + self.fieldname + '/'
         self.alt = self.context.Title()
-        self.src_small = BASE + '/mini'
-        self.src_medium = BASE + '/preview'
-        self.src_large = BASE + '/large'
-        self.src_extralarge = BASE
-        self.media_medium = "(min-width: 400px)"
-        self.media_large = "(min-width: 800px)"
-        self.media_extralarge = "(min-width: 1000px)"
+        self.pictures, self.noscript = getPictures(base_url)
 
     def __call__(self):
         self.update()

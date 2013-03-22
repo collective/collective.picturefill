@@ -1,9 +1,8 @@
  <div data-picture tal:attributes="data-alt string:${view/alt}">
-   <div tal:attributes="data-src string:${view/src_small}"></div>
-   <div tal:attributes="data-src string:${view/src_medium}; data-media string:${view/media_medium}"></div>
-   <div tal:attributes="data-src string:${view/src_large}; data-media string:${view/media_large}"></div>
-   <div tal:attributes="data-src string:${view/src_extralarge}; data-media string:${view/media_large}"></div>
+   <tal:picture tal:repeat="picture view/pictures">
+     <div tal:attributes="data-src string:${picture/src}; data-media string:${picture/media}"></div>
+   </tal:picture>
    <noscript>
-       <img tal:attributes="src string:${view/src_small}; alt string:${view/alt}">
+       <img tal:attributes="src string:${view/noscript}; alt string:${view/alt}">
    </noscript>
 </div>
