@@ -33,6 +33,11 @@ class UnitTestCommon(base.UnitTestCase):
         view = PictureFill(self.context, self.request)
         view.sizes = self.sizes
         view.update()
+        self.assertEqual(view.alt, 'a title')
+        self.assertEqual(view.context_url, 'http://nohost.com/myid')
+        self.assertEqual(view.fieldname, 'image')
+        base_url = 'http://nohost.com/myid/@@images/image/'
+        self.assertEqual(view.base_url, base_url)
 
 
 class IntegrationTestCommon(base.IntegrationTestCase):
@@ -42,9 +47,7 @@ class IntegrationTestCommon(base.IntegrationTestCase):
 
     def test_getPictures(self):
         base_url = 'http://nohost/plone/myimage/@@images/image/'
-        from plone.app.imaging.utils import getAllowedSizes
-        sizes = getAllowedSizes()
-        pictures, noscript = common.getPictures(base_url, sizes)
+        pictures, noscript = common.getPictures(base_url, self.sizes)
         self.assertEqual(len(pictures), 8)
         thumb_url = base_url + 'thumb'
         self.assertEqual(noscript, thumb_url)

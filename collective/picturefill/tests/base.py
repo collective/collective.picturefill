@@ -2,7 +2,7 @@ import transaction
 import unittest2 as unittest
 from plone.app import testing
 import collective.picturefill
-from collective.picturefill.tests.fake import FakeContext
+from collective.picturefill.tests.fake import FakeContext, FakeRequest
 
 
 FIXTURE = testing.PloneWithPackageLayer(
@@ -25,8 +25,8 @@ FUNCTIONAL = testing.FunctionalTesting(
 class UnitTestCase(unittest.TestCase):
 
     def setUp(self):
-        from ZPublisher.tests.testPublish import Request
-        self.request = Request()
+        
+        self.request = FakeRequest()
         self.context = FakeContext()
         sizes = {'mini': (200, 200), 'thumb': (128, 128), 'large': (768, 768)}
         self.sizes = sizes
@@ -43,6 +43,8 @@ class IntegrationTestCase(unittest.TestCase):
         self.portal.invokeFactory('Folder', 'test-folder')
         testing.setRoles(self.portal, testing.TEST_USER_ID, ['Member'])
         self.folder = self.portal['test-folder']
+        from plone.app.imaging.utils import getAllowedSizes
+        self.sizes = getAllowedSizes()
 
 
 class FunctionalTestCase(IntegrationTestCase):

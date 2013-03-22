@@ -1,3 +1,4 @@
+from ZPublisher.tests.testPublish import Request
 
 
 class FakeContext(object):
@@ -34,6 +35,19 @@ class FakeContext(object):
 
     def absolute_url(self):
         return "http://nohost.com/" + self.id
+
+
+class FakeRequest(Request):
+
+    def __init__(self):
+        Request.__init__(self)
+        self.args = {}
+
+    def __setitem__(self, name, value):
+        self.args[name] = value
+
+    def get(self, a, b=''):
+        return self.args.get(a, b)
 
 
 class FakeBrain(object):
