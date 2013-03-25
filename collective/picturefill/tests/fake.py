@@ -67,6 +67,14 @@ class FakeBrain(object):
         return ob
 
 
+class FakeTile(object):
+
+    def __init__(self):
+        self.data = {'title': 'a title'}
+        self.request = FakeRequest()
+        self.url = 'http://nohost.com/@@mytiletype/mytile'
+
+
 class FakeProperty(object):
     def __init__(self):
         self.photo_max_size = 400
