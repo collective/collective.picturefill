@@ -1,7 +1,7 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.globalrequest import getRequest
 from collective.picturefill.common import getPictures
 from plone.app.imaging.utils import getAllowedSizes
+
 
 class PictureFill(object):
     def __init__(self, context):
