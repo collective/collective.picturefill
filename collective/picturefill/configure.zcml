@@ -48,9 +48,15 @@
       permission="zope2.View"
       />
   <adapter
-    for="Products.ZCatalog.interfaces.ICatalogBrain"
-    provides=".interfaces.IPictureFill"
-    factory=".brain.PictureFill"
+      for="Products.ZCatalog.interfaces.ICatalogBrain"
+      provides=".interfaces.IPictureFill"
+      factory=".brain.PictureFill"
+    />
+  <adapter
+      zcml:condition="installed plone.tiles"
+      for="plone.tiles.interfaces.ITile"
+      provides=".interfaces.IPictureFill"
+      factory=".tile.PictureFill"
     />
   <browser:page
       zcml:condition="installed plone.namedfile"
