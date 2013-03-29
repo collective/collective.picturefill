@@ -36,5 +36,7 @@ class PictureFill(object):
         if not self.pictures or not self.noscript:
             pictures = getPictures(self.base_url, self.sizes)
             self.pictures, self.noscript = pictures
+            #Tile doesn't support @@/images/fieldname without a scale...
+            self.pictures = self.pictures[:-1]
 
     index = ViewPageTemplateFile('picturefill.pt')
