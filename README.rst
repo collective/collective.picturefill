@@ -5,6 +5,8 @@ This addon install picturefill_ in Plone and provide a suite of tools to
 display images from different kind of components such as brain, dexterity object
 or archetypes object.
 
+version: https://github.com/scottjehl/picturefill/tree/00936788c29059834bc78b119fc45ebc3bc056eb
+
 How to install
 ==============
 

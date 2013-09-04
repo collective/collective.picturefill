@@ -1,9 +1,9 @@
-<div data-picture tal:attributes="data-alt string:${view/alt}">
-   <div tal:attributes="data-src string:${view/noscript};"></div>
+<span data-picture tal:attributes="data-alt string:${view/alt}">
+   <span tal:attributes="data-src string:${view/noscript};"></span>
    <tal:picture tal:repeat="picture view/pictures">
-     <div tal:attributes="data-src string:${picture/src}; data-media string:${picture/media}"></div>
+     <span tal:attributes="data-src string:${picture/src}; data-media string:${picture/media}"></span>
    </tal:picture>
    <noscript>
-       <img tal:attributes="src string:${view/noscript}; alt string:${view/alt}">
+       <img tal:attributes="src string:${view/noscript}; alt string:${view/alt}"/>
    </noscript>
-</div>
+</span>

@@ -4,7 +4,8 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Update picturefill to https://github.com/scottjehl/picturefill/tree/00936788c29059834bc78b119fc45ebc3bc056eb [toutpt]
+- Use span instead of div as asked by this new version [toutpt]
 
 
 1.2 (2013-04-29)
