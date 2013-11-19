@@ -10,8 +10,21 @@ version: https://github.com/scottjehl/picturefill/tree/00936788c29059834bc78b119
 How to install
 ==============
 
-.. image:: https://secure.travis-ci.org/toutpt/collective.picturefill.png
-    :target: http://travis-ci.org/toutpt/collective.picturefill
+.. image:: https://pypip.in/v/collective.picturefill/badge.png
+    :target: https://crate.io/packages/collective.picturefill/
+    :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/collective.picturefill/badge.png
+    :target: https://crate.io/packages/collective.picturefill/
+    :alt: Number of PyPI downloads
+
+.. image:: https://secure.travis-ci.org/collective/collective.picturefill.png
+    :target: http://travis-ci.org/#!/collective/collective.picturefill
+
+.. image:: https://coveralls.io/repos/collective/collective.picturefill/badge.png?branch=master
+    :alt: Coverage
+    :target: https://coveralls.io/r/collective/collective.picturefill
+
 
 This addon can be installed has any other addons. please follow official
 documentation_
