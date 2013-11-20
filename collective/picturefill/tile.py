@@ -30,7 +30,8 @@ class PictureFill(object):
         if not self.context_url:
             self.context_url = self.context.url
         if not self.base_url:
-            self.base_url = self.context_url + '/@@images/' + self.fieldname + '/'
+            self.base_url = (self.context_url + '/@@images/' +
+                             self.fieldname + '/')
         if not self.sizes:
             self.sizes = getAllowedSizes()
         if not self.pictures or not self.noscript:
